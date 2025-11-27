@@ -1,0 +1,50 @@
+import time
+parked = {}
+max_slots = 2
+
+while True:
+    print("\n[=== PARKING ===]")
+    print("1. Park Vehicle")
+    print("2. Remove Vehicle")
+    print("3. View Parked Vehicles")
+    print("4. Exit")
+    
+    choice = int(input("Choice: "))
+
+    if choice == 1:
+        if len(parked) >= max_slots:
+            print("Full! Come back later!")
+        else:
+            plate = input("Enter Plate No.: ")
+            if plate in parked:
+                print("Already parked!")
+            else:
+                parked[plate] = time.strftime("%Y-%m-%d %H:%M:%S")
+                print("Parked!")
+
+    elif choice == 2:
+        if not parked:
+            print("None.")
+        else:
+            plate = input("Enter Plate No. to remove: ")
+            if plate in parked:
+                time_out = time.strftime("%Y-%m-%d %H:%M:%S")
+                print(f"Removed!\nIn: {parked[plate]}\nOut: {time_out}")
+                del parked[plate]
+            else:
+                print("Not found.")
+
+    elif choice == 3:
+        if not parked:
+            print("None.")
+        else:
+            print("[--- Parked ---]")
+            for i, (p, t) in enumerate(parked.items(), 1):
+                print(f"{i}. {p} | {t}")
+
+    elif choice == 4:
+        print("Exiting...")
+        break
+
+    else:
+        print("Invalid!")README.md
